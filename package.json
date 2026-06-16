@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "build:mac": "electron-builder --mac -c.mac.notarize=false",
-    "build:mac:release": "electron-builder --mac --universal",
+    "build:mac": "electron-builder --mac dmg zip --x64 --arm64 -c.mac.notarize=false -c.mac.hardenedRuntime=false -c.mac.identity=null",
+    "build:mac:release": "electron-builder --mac dmg zip --x64 --arm64",
     "lint": "node --check main.js && node --check preload.js && node --check src/renderer.js && node --check src/settings.js && node --check src/services/googleSpeech.js && node --check src/utils/pasteText.js && node --check src/utils/settingsStore.js"
   },
   "dependencies": {
@@ -41,18 +41,8 @@
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.inherit.plist",
       "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "universal"
-          ]
-        },
-        {
-          "target": "zip",
-          "arch": [
-            "universal"
-          ]
-        }
+        "dmg",
+        "zip"
       ],
       "icon": "src/assets/icon.png",
       "extendInfo": {

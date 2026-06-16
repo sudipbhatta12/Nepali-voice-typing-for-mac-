@@ -24,8 +24,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build, sign, and notarize macOS package
-        run: npm run build:mac:release
+      - name: Build macOS package
+        run: |
+          if [[ -n "$CSC_LINK" && -n "$CSC_KEY_PASSWORD" && -n "$APPLE_ID" && -n "$APPLE_APP_SPECIFIC_PASSWORD" && -n "$APPLE_TEAM_ID" ]]; then
+            echo "Apple signing secrets found. Building signed and notarized release."
+            npm run build:mac:release
+          else
+            echo "Apple signing secrets are missing. Building unsigned development artifact."
+            npm run build:mac
+          fi
         env:
           CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}

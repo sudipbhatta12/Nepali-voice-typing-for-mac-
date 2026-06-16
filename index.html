@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Voice Typer</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body class="floating-body">
+    <main class="floating-shell" aria-label="Nepali Voice Typer">
+      <div class="drag-handle" aria-hidden="true">
+        <span></span>
+      </div>
+
+      <section class="mic-row" aria-label="Voice typing controls">
+        <button class="icon-button settings-icon" id="settingsButton" type="button" title="Settings" aria-label="Open settings">
+          <svg class="button-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.7 3.5h4.6l.6 2.5c.5.2 1 .5 1.5.9l2.4-.8 2.3 4-1.8 1.8c.1.6.1 1.1 0 1.7l1.8 1.8-2.3 4-2.4-.8c-.5.4-1 .7-1.5.9l-.6 2.5H9.7l-.6-2.5c-.5-.2-1-.5-1.5-.9l-2.4.8-2.3-4 1.8-1.8c-.1-.6-.1-1.1 0-1.7L2.9 10.1l2.3-4 2.4.8c.5-.4 1-.7 1.5-.9l.6-2.5Z"></path>
+            <circle cx="12" cy="12.8" r="3.2"></circle>
+          </svg>
+        </button>
+
+        <button class="mic-button" id="micButton" type="button" title="Start listening" aria-label="Start listening">
+          <span class="mic-glyph" aria-hidden="true"></span>
+        </button>
+
+        <button class="icon-button close-icon" id="hideButton" type="button" title="Hide" aria-label="Hide window">
+          <span aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <p class="status-text" id="statusText" role="status">Ready</p>
+    </main>
+
+    <script src="src/renderer.js"></script>
+  </body>
+</html>

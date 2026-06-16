@@ -1,0 +1,64 @@
+{
+  "name": "nepali-voice-typer",
+  "version": "1.0.0",
+  "description": "A small floating macOS voice typing app for Nepali speech recognition.",
+  "main": "main.js",
+  "author": "Ganesh Parajuli",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-builder --mac -c.mac.notarize=false",
+    "build:mac:release": "electron-builder --mac --universal",
+    "lint": "node --check main.js && node --check preload.js && node --check src/renderer.js && node --check src/settings.js && node --check src/services/googleSpeech.js && node --check src/utils/pasteText.js && node --check src/utils/settingsStore.js"
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^7.0.1"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.ganeshparajuli.nepalivoicetyper",
+    "productName": "Nepali Voice Typer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "settings.html",
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "notarize": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.inherit.plist",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "icon": "src/assets/icon.png",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Nepali Voice Typer needs microphone access to record speech for transcription.",
+        "NSAppleEventsUsageDescription": "Nepali Voice Typer uses Apple Events to paste recognized text into the active app."
+      }
+    }
+  }
+}

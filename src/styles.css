@@ -1,0 +1,377 @@
+:root {
+  color-scheme: dark;
+  --bg: #15171d;
+  --bg-soft: #1c2028;
+  --panel: #20252f;
+  --border: #333b49;
+  --text: #f5f7fb;
+  --muted: #aab3c2;
+  --blue: #2878ff;
+  --blue-soft: #55a4ff;
+  --green: #38d39f;
+  --red: #ff5d5d;
+  --amber: #f0b84d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+  color: var(--text);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.floating-body {
+  width: 220px;
+  height: 110px;
+  overflow: hidden;
+}
+
+.floating-shell {
+  width: 220px;
+  height: 110px;
+  padding: 8px 12px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: rgba(20, 22, 27, 0.96);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  -webkit-app-region: drag;
+}
+
+.drag-handle {
+  display: flex;
+  justify-content: center;
+  height: 14px;
+}
+
+.drag-handle span {
+  width: 44px;
+  height: 4px;
+  margin-top: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.mic-row {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 8px;
+  height: 62px;
+}
+
+.icon-button,
+.mic-button {
+  display: inline-grid;
+  place-items: center;
+  border: 0;
+  color: var(--text);
+  -webkit-app-region: no-drag;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.button-svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.close-icon span {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.close-icon span::before,
+.close-icon span::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 2px;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.close-icon span::before {
+  transform: rotate(45deg);
+}
+
+.close-icon span::after {
+  transform: rotate(-45deg);
+}
+
+.mic-button {
+  width: 58px;
+  height: 58px;
+  justify-self: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 24%, var(--blue-soft), var(--blue) 62%, #1454d8);
+  box-shadow: 0 10px 24px rgba(40, 120, 255, 0.38);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.mic-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(40, 120, 255, 0.48);
+}
+
+.mic-button.is-recording {
+  background: radial-gradient(circle at 36% 24%, #ff8989, var(--red) 62%, #cf2f3b);
+  box-shadow: 0 0 0 6px rgba(255, 93, 93, 0.14), 0 12px 32px rgba(255, 93, 93, 0.42);
+}
+
+.mic-glyph {
+  position: relative;
+  width: 22px;
+  height: 30px;
+}
+
+.mic-glyph::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 1px;
+  width: 10px;
+  height: 18px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.mic-glyph::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 11px;
+  width: 16px;
+  height: 13px;
+  border: 3px solid #ffffff;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 6px 11px 0 -5px #ffffff, -6px 11px 0 -5px #ffffff;
+}
+
+.status-text {
+  min-height: 16px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-text[data-tone="recording"] {
+  color: #ffb3b3;
+}
+
+.status-text[data-tone="success"] {
+  color: var(--green);
+}
+
+.status-text[data-tone="warning"] {
+  color: var(--amber);
+}
+
+.status-text[data-tone="error"] {
+  color: var(--red);
+}
+
+.settings-body {
+  min-height: 100vh;
+  background: #111317;
+}
+
+.settings-page {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.settings-header {
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--blue-soft);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.settings-form {
+  display: grid;
+  gap: 18px;
+}
+
+.settings-section {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+}
+
+.settings-section h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.settings-section label {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.settings-section input[type="text"],
+.settings-section select {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 12px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+
+.settings-section input[type="text"]:focus,
+.settings-section select:focus {
+  border-color: var(--blue-soft);
+  box-shadow: 0 0 0 3px rgba(85, 164, 255, 0.14);
+}
+
+.file-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.file-row button,
+.primary-button {
+  height: 40px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 14px;
+  background: var(--blue);
+  color: white;
+  font-weight: 700;
+}
+
+.file-row button {
+  background: #313947;
+}
+
+.file-row button:hover,
+.primary-button:hover {
+  filter: brightness(1.08);
+}
+
+.help-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.check-row {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.check-row input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--blue);
+}
+
+.permission-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+}
+
+.save-status {
+  margin: 0;
+  min-height: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.save-status[data-tone="success"] {
+  color: var(--green);
+}
+
+.save-status[data-tone="error"] {
+  color: var(--red);
+}
+
+@media (max-width: 520px) {
+  .settings-page {
+    padding: 20px;
+  }
+
+  .file-row,
+  .form-actions {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+}

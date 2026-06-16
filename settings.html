@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Voice Typer Settings</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body class="settings-body">
+    <main class="settings-page">
+      <header class="settings-header">
+        <p class="eyebrow">Settings</p>
+        <h1>Nepali Voice Typer</h1>
+      </header>
+
+      <form id="settingsForm" class="settings-form">
+        <section class="settings-section">
+          <h2>Google Speech-to-Text</h2>
+          <label for="credentialsPath">Service account JSON path</label>
+          <div class="file-row">
+            <input id="credentialsPath" name="credentialsPath" type="text" placeholder="Leave empty to use GOOGLE_APPLICATION_CREDENTIALS">
+            <button id="browseCredentials" type="button">Browse</button>
+          </div>
+          <p class="help-text">The file path is saved locally in Electron userData. The JSON file itself is not copied into the app.</p>
+
+          <label for="languageCode">Recognition language</label>
+          <select id="languageCode" name="languageCode">
+            <option value="ne-NP">Nepali (Nepal) - ne-NP</option>
+            <option value="en-US">English (United States) - en-US</option>
+            <option value="hi-IN">Hindi (India) - hi-IN</option>
+          </select>
+        </section>
+
+        <section class="settings-section">
+          <h2>Shortcuts</h2>
+          <label for="shortcutToggle">Start/stop listening</label>
+          <input id="shortcutToggle" name="shortcutToggle" type="text" placeholder="Control+Option+Space">
+
+          <label for="shortcutHide">Hide/show floating mic</label>
+          <input id="shortcutHide" name="shortcutHide" type="text" placeholder="Control+Option+H">
+          <p class="help-text">On Windows, Electron treats Option as Alt for testing.</p>
+        </section>
+
+        <section class="settings-section">
+          <h2>Behavior</h2>
+          <label class="check-row" for="alwaysOnTop">
+            <input id="alwaysOnTop" name="alwaysOnTop" type="checkbox">
+            <span>Keep floating mic above other windows</span>
+          </label>
+
+          <label class="check-row" for="startAtLogin">
+            <input id="startAtLogin" name="startAtLogin" type="checkbox">
+            <span>Start Nepali Voice Typer automatically when the Mac starts</span>
+          </label>
+        </section>
+
+        <section class="settings-section">
+          <h2>macOS Permissions</h2>
+          <p class="help-text">Enable these if recording or paste does not work:</p>
+          <ul class="permission-list">
+            <li>System Settings &gt; Privacy &amp; Security &gt; Microphone</li>
+            <li>System Settings &gt; Privacy &amp; Security &gt; Accessibility</li>
+            <li>System Settings &gt; Privacy &amp; Security &gt; Input Monitoring</li>
+          </ul>
+        </section>
+
+        <div class="form-actions">
+          <button id="saveButton" class="primary-button" type="submit">Save Settings</button>
+          <p id="saveStatus" class="save-status" role="status"></p>
+        </div>
+      </form>
+    </main>
+
+    <script src="src/settings.js"></script>
+  </body>
+</html>
